@@ -7,6 +7,7 @@ namespace VotingWeb.Controllers
 {
     using global::VotingWeb.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
     using System.Fabric;
 
     public class HomeController : Controller
@@ -24,7 +25,7 @@ namespace VotingWeb.Controllers
             {
                 AppID = Startup.AppId.ToString(),
                 NodeName = serviceContext.NodeContext.NodeName,
-                RequestIP = ""/*Request.HttpContext.Connection.RemoteIpAddress.ToString()*/
+                RequestIP = ""
             };
 
             return this.View(viewModel);
