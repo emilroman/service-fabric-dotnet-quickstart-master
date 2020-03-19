@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VotingWeb.Controllers
 {
+    [Route("[controller]")]
     public class HealthController : Controller
     {
+        [HttpGet("")]
         public HttpStatusCode Index()
         {
             return HttpStatusCode.OK;
