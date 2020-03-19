@@ -64,47 +64,47 @@ namespace VotingWeb.Controllers
             return this.Json(result);
         }
 
-        // PUT: api/Votes/name
-        [HttpPut("{name}")]
-        public async Task<IActionResult> Put(string name)
-        {
-            Uri serviceName = VotingWeb.GetVotingDataServiceName(this.serviceContext);
-            Uri proxyAddress = this.GetProxyAddress(serviceName);
-            long partitionKey = this.GetPartitionKey(name);
-            string proxyUrl = $"{proxyAddress}/api/VoteData/{name}?PartitionKey={partitionKey}&PartitionKind=Int64Range";
+        //// PUT: api/Votes/name
+        //[HttpPut("{name}")]
+        //public async Task<IActionResult> Put(string name)
+        //{
+        //    Uri serviceName = VotingWeb.GetVotingDataServiceName(this.serviceContext);
+        //    Uri proxyAddress = this.GetProxyAddress(serviceName);
+        //    long partitionKey = this.GetPartitionKey(name);
+        //    string proxyUrl = $"{proxyAddress}/api/VoteData/{name}?PartitionKey={partitionKey}&PartitionKind=Int64Range";
 
-            StringContent putContent = new StringContent($"{{ 'name' : '{name}' }}", Encoding.UTF8, "application/json");
-            putContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        //    StringContent putContent = new StringContent($"{{ 'name' : '{name}' }}", Encoding.UTF8, "application/json");
+        //    putContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            using (HttpResponseMessage response = await this.httpClient.PutAsync(proxyUrl, putContent))
-            {
-                return new ContentResult()
-                {
-                    StatusCode = (int) response.StatusCode,
-                    Content = await response.Content.ReadAsStringAsync()
-                };
-            }
-        }
+        //    using (HttpResponseMessage response = await this.httpClient.PutAsync(proxyUrl, putContent))
+        //    {
+        //        return new ContentResult()
+        //        {
+        //            StatusCode = (int) response.StatusCode,
+        //            Content = await response.Content.ReadAsStringAsync()
+        //        };
+        //    }
+        //}
 
-        // DELETE: api/Votes/name
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> Delete(string name)
-        {
-            Uri serviceName = VotingWeb.GetVotingDataServiceName(this.serviceContext);
-            Uri proxyAddress = this.GetProxyAddress(serviceName);
-            long partitionKey = this.GetPartitionKey(name);
-            string proxyUrl = $"{proxyAddress}/api/VoteData/{name}?PartitionKey={partitionKey}&PartitionKind=Int64Range";
+        //// DELETE: api/Votes/name
+        //[HttpDelete("{name}")]
+        //public async Task<IActionResult> Delete(string name)
+        //{
+        //    Uri serviceName = VotingWeb.GetVotingDataServiceName(this.serviceContext);
+        //    Uri proxyAddress = this.GetProxyAddress(serviceName);
+        //    long partitionKey = this.GetPartitionKey(name);
+        //    string proxyUrl = $"{proxyAddress}/api/VoteData/{name}?PartitionKey={partitionKey}&PartitionKind=Int64Range";
 
-            using (HttpResponseMessage response = await this.httpClient.DeleteAsync(proxyUrl))
-            {
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    return this.StatusCode((int) response.StatusCode);
-                }
-            }
+        //    using (HttpResponseMessage response = await this.httpClient.DeleteAsync(proxyUrl))
+        //    {
+        //        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        //        {
+        //            return this.StatusCode((int) response.StatusCode);
+        //        }
+        //    }
 
-            return new OkResult();
-        }
+        //    return new OkResult();
+        //}
 
 
         /// <summary>
